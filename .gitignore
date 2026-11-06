@@ -1,0 +1,9 @@
+/build/
+/dist/
+/private/
+*.jks
+*.keystore
+*password*
+lostword-original-*.json
+original-save.json
+__pycache__/

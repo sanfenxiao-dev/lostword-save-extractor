@@ -1,0 +1,1224 @@
+{
+  "schema": {
+    "UserImpl": {
+      "player_name": "string",
+      "hero_name": "string",
+      "comment": "string",
+      "level": "int",
+      "exp": "long",
+      "favorite": "Favorite",
+      "phantasm_point": "PhantasmPoint",
+      "phantasm_box": "PhantasmBox",
+      "gold": "int",
+      "gold_box": "GoldBox",
+      "orb": "Orb",
+      "piece": "int",
+      "crystal": "int",
+      "fortune_powder": "int",
+      "team": "Team",
+      "unit": "Unit",
+      "picture": "Picture",
+      "item": "Item",
+      "costume": "Costume",
+      "dispatch": "Dispatch",
+      "lecture_room": "LectureRoom",
+      "training_room": "TrainingRoom",
+      "quest_playdata": "List<QuestPlayData>",
+      "extra_quest_count": "int",
+      "event_extra_quest_count": "int",
+      "another_extra_quest_count": "int",
+      "yukkuri_extra_quest_count": "int",
+      "extra_quest_count_info": "List<ExtraQuestCountInfo>",
+      "album": "Album",
+      "point": "int",
+      "loginbonus_gain_time": "string",
+      "event_info": "List<EventInfo>",
+      "daily_quest_count_list": "List<DailyQuest>",
+      "event_quest_count_list": "List<EventQuest>",
+      "character_quest_list": "List<CharacterQuest>",
+      "relic_quest_list": "List<RelicQuest>",
+      "unit_voice_autoset": "int",
+      "age_limit_type": "int",
+      "is_FdOpen": "int",
+      "progress_value": "int",
+      "figure_present": "FigurePresent",
+      "anniversary_present": "AnniversaryPresent",
+      "delivery_list": "List<Delivery>",
+      "do_cache_delete": "int",
+      "tower": "Tower",
+      "roulette_gacha_count": "List<RouletteGachaCount>",
+      "select_bgm": "int",
+      "bgm_item": "BGMItem",
+      "last_free_item_gain_at": "string",
+      "retry_gacha_count": "List<RetryGachaData>",
+      "step_up_gacha_count": "List<StepUpGachaCount>",
+      "home_unit_info": "HomeUnitInfo",
+      "comic_point": "int",
+      "comic_data": "List<ComicData>",
+      "weekly_arena_user_unit_list": "List<long>",
+      "gained_friend_point": "int",
+      "friend_used_count": "int",
+      "non_friend_used_count": "int",
+      "current_friend_point": "int",
+      "helper_used_histories": "string",
+      "helper_user_unit_id1": "long",
+      "first_clear": "int",
+      "series_battle_status": "SeriesBattleStatus",
+      "battle_pass": "BattlePassStatus",
+      "achievement": "Achievement",
+      "arena_point": "int",
+      "mop_up_coupon": "int",
+      "mop_up_day_coupon": "int",
+      "avatar_filename": "string",
+      "avatar_desc": "string",
+      "avatar_title": "string",
+      "avatar_id": "int",
+      "HeadListItemList": "List<HeadListItem>",
+      "isShowRedPoint": "bool",
+      "QstinfState": "PlayData.State",
+      "shopRedPoint": "bool",
+      "guideTipsIsShow": "bool",
+      "ability_seal": "AbilityCard",
+      "auto_replay": "AutoReplay",
+      "roguelite_uuid_list": "List<long>",
+      "roguelite_cleared_map_id_list": "List<int>",
+      "is_roguelite_top_init": "int",
+      "is_roguelite_in_progress": "int"
+    },
+    "Favorite": {
+      "user_unit_id": "long",
+      "operated_at": "string"
+    },
+    "PhantasmPoint": {
+      "points": "int",
+      "purchase_count": "int"
+    },
+    "PhantasmBox": {
+      "level": "int",
+      "renovation_finish_time": "string",
+      "full_stock_time": "string"
+    },
+    "GoldBox": {
+      "level": "int",
+      "renovation_finish_time": "string",
+      "full_stock_time": "string"
+    },
+    "Orb": {
+      "free": "int",
+      "purchased": "int"
+    },
+    "Team": {
+      "team_list": "List<UserTeam>"
+    },
+    "UserTeam": {
+      "number": "int",
+      "name": "string",
+      "user_unit_id_list": "List<long>",
+      "use_cost": "int",
+      "season_enhancement_user_unit_id_list": "List<long>"
+    },
+    "Unit": {
+      "expansion_rank": "int",
+      "unit_list": "List<UserUnit>",
+      "tower_unit_list": "List<TowerUnitData>"
+    },
+    "UserUnit": {
+      "user_unit_id": "long",
+      "unit_id": "int",
+      "exp": "long",
+      "level": "int",
+      "level_limitbreak": "int",
+      "rank": "int",
+      "reincarnation_state": "int",
+      "reincarnation_stage": "int",
+      "rare": "int",
+      "trust": "int",
+      "last_trust_at": "string",
+      "is_lecture": "int",
+      "motivation": "int",
+      "last_motivation_at": "string",
+      "is_favorite": "int",
+      "add_life_point": "int",
+      "add_yang_attack": "int",
+      "add_yang_defense": "int",
+      "add_yin_attack": "int",
+      "add_yin_defense": "int",
+      "add_speed": "int",
+      "is_set_rank_promote_slot1": "int",
+      "is_set_rank_promote_slot2": "int",
+      "is_set_rank_promote_slot3": "int",
+      "is_set_rank_promote_slot4": "int",
+      "is_set_rank_promote_slot5": "int",
+      "is_set_rank_promote_slot6": "int",
+      "equip_spellcard1_user_picture_id": "long",
+      "equip_spellcard2_user_picture_id": "long",
+      "equip_spellcard3_user_picture_id": "long",
+      "equip_spellcard4_user_picture_id": "long",
+      "equip_spellcard5_user_picture_id": "long",
+      "skill1_level": "int",
+      "skill1_exp": "long",
+      "skill2_level": "int",
+      "skill2_exp": "long",
+      "skill3_level": "int",
+      "skill3_exp": "long",
+      "equip_costume_id": "int",
+      "is_protection": "int",
+      "is_new": "int",
+      "select_bgm": "int",
+      "release_functions": "List<int>",
+      "home_motion": "int",
+      "strong_fragrant_wood": "StrongFragrantWood",
+      "strong_fragrant_wood_limit_info": "StrongFragrantWoodLimitInfo",
+      "enhanced_skill": "EnhancedSkill",
+      "enhanced_characteristic": "EnhancedhCaracteristic",
+      "enhanced_shot": "EnhancedShot",
+      "release_spellcard": "List<int>",
+      "enhanced_spellcard": "EnhancedSpellcard",
+      "destiny_value": "int",
+      "point_allocation_info": "PointAllocationInfo"
+    },
+    "StrongFragrantWood": {
+      "type_1": "int",
+      "type_2": "int",
+      "type_3": "int",
+      "type_4": "int",
+      "type_5": "int",
+      "type_6": "int",
+      "add_life_point": "int",
+      "add_yang_attack": "int",
+      "add_yang_defense": "int",
+      "add_yin_attack": "int",
+      "add_yin_defense": "int",
+      "add_speed": "int"
+    },
+    "StrongFragrantWoodLimitInfo": {
+      "type_1": "int",
+      "type_2": "int",
+      "type_3": "int",
+      "type_4": "int",
+      "type_5": "int",
+      "type_6": "int",
+      "reincarnation_stage": "int",
+      "life_point": "int",
+      "yang_attack": "int",
+      "yang_defense": "int",
+      "yin_attack": "int",
+      "yin_defense": "int",
+      "speed": "int",
+      "limitbreak_params": "Dictionary<int, int>"
+    },
+    "EnhancedSkill": {
+      "skill1_id": "int",
+      "skill2_id": "int",
+      "skill3_id": "int"
+    },
+    "EnhancedhCaracteristic": {
+      "characteristic1_id": "int",
+      "characteristic2_id": "int",
+      "characteristic3_id": "int"
+    },
+    "EnhancedShot": {
+      "shot_a_magazine0_bullet_id": "int",
+      "shot_a_magazine1_bullet_id": "int",
+      "shot_a_magazine2_bullet_id": "int",
+      "shot_a_magazine3_bullet_id": "int",
+      "shot_a_magazine4_bullet_id": "int",
+      "shot_a_magazine5_bullet_id": "int",
+      "shot_b_magazine0_bullet_id": "int",
+      "shot_b_magazine1_bullet_id": "int",
+      "shot_b_magazine2_bullet_id": "int",
+      "shot_b_magazine3_bullet_id": "int",
+      "shot_b_magazine4_bullet_id": "int",
+      "shot_b_magazine5_bullet_id": "int"
+    },
+    "EnhancedSpellcard": {
+      "spellcard_1_magazine0_bullet_id": "int",
+      "spellcard_1_magazine1_bullet_id": "int",
+      "spellcard_1_magazine2_bullet_id": "int",
+      "spellcard_1_magazine3_bullet_id": "int",
+      "spellcard_1_magazine4_bullet_id": "int",
+      "spellcard_1_magazine5_bullet_id": "int",
+      "spellcard_2_magazine0_bullet_id": "int",
+      "spellcard_2_magazine1_bullet_id": "int",
+      "spellcard_2_magazine2_bullet_id": "int",
+      "spellcard_2_magazine3_bullet_id": "int",
+      "spellcard_2_magazine4_bullet_id": "int",
+      "spellcard_2_magazine5_bullet_id": "int",
+      "spellcard_3_magazine0_bullet_id": "int",
+      "spellcard_3_magazine1_bullet_id": "int",
+      "spellcard_3_magazine2_bullet_id": "int",
+      "spellcard_3_magazine3_bullet_id": "int",
+      "spellcard_3_magazine4_bullet_id": "int",
+      "spellcard_3_magazine5_bullet_id": "int",
+      "spellcard_4_magazine0_bullet_id": "int",
+      "spellcard_4_magazine1_bullet_id": "int",
+      "spellcard_4_magazine2_bullet_id": "int",
+      "spellcard_4_magazine3_bullet_id": "int",
+      "spellcard_4_magazine4_bullet_id": "int",
+      "spellcard_4_magazine5_bullet_id": "int",
+      "spellcard_5_magazine0_bullet_id": "int",
+      "spellcard_5_magazine1_bullet_id": "int",
+      "spellcard_5_magazine2_bullet_id": "int",
+      "spellcard_5_magazine3_bullet_id": "int",
+      "spellcard_5_magazine4_bullet_id": "int",
+      "spellcard_5_magazine5_bullet_id": "int",
+      "spellcard_1_skill1_effect_id": "int",
+      "spellcard_1_skill2_effect_id": "int",
+      "spellcard_1_skill3_effect_id": "int",
+      "spellcard_1_skill4_effect_id": "int",
+      "spellcard_1_skill5_effect_id": "int",
+      "spellcard_2_skill1_effect_id": "int",
+      "spellcard_2_skill2_effect_id": "int",
+      "spellcard_2_skill3_effect_id": "int",
+      "spellcard_2_skill4_effect_id": "int",
+      "spellcard_2_skill5_effect_id": "int",
+      "spellcard_3_skill1_effect_id": "int",
+      "spellcard_3_skill2_effect_id": "int",
+      "spellcard_3_skill3_effect_id": "int",
+      "spellcard_3_skill4_effect_id": "int",
+      "spellcard_3_skill5_effect_id": "int",
+      "spellcard_4_skill1_effect_id": "int",
+      "spellcard_4_skill2_effect_id": "int",
+      "spellcard_4_skill3_effect_id": "int",
+      "spellcard_4_skill4_effect_id": "int",
+      "spellcard_4_skill5_effect_id": "int",
+      "spellcard_5_skill1_effect_id": "int",
+      "spellcard_5_skill2_effect_id": "int",
+      "spellcard_5_skill3_effect_id": "int",
+      "spellcard_5_skill4_effect_id": "int",
+      "spellcard_5_skill5_effect_id": "int",
+      "spellcard_1_skill1_level_type": "int",
+      "spellcard_1_skill2_level_type": "int",
+      "spellcard_1_skill3_level_type": "int",
+      "spellcard_1_skill4_level_type": "int",
+      "spellcard_1_skill5_level_type": "int",
+      "spellcard_2_skill1_level_type": "int",
+      "spellcard_2_skill2_level_type": "int",
+      "spellcard_2_skill3_level_type": "int",
+      "spellcard_2_skill4_level_type": "int",
+      "spellcard_2_skill5_level_type": "int",
+      "spellcard_3_skill1_level_type": "int",
+      "spellcard_3_skill2_level_type": "int",
+      "spellcard_3_skill3_level_type": "int",
+      "spellcard_3_skill4_level_type": "int",
+      "spellcard_3_skill5_level_type": "int",
+      "spellcard_4_skill1_level_type": "int",
+      "spellcard_4_skill2_level_type": "int",
+      "spellcard_4_skill3_level_type": "int",
+      "spellcard_4_skill4_level_type": "int",
+      "spellcard_4_skill5_level_type": "int",
+      "spellcard_5_skill1_level_type": "int",
+      "spellcard_5_skill2_level_type": "int",
+      "spellcard_5_skill3_level_type": "int",
+      "spellcard_5_skill4_level_type": "int",
+      "spellcard_5_skill5_level_type": "int",
+      "spellcard_1_skill1_level_value": "int",
+      "spellcard_1_skill2_level_value": "int",
+      "spellcard_1_skill3_level_value": "int",
+      "spellcard_1_skill4_level_value": "int",
+      "spellcard_1_skill5_level_value": "int",
+      "spellcard_2_skill1_level_value": "int",
+      "spellcard_2_skill2_level_value": "int",
+      "spellcard_2_skill3_level_value": "int",
+      "spellcard_2_skill4_level_value": "int",
+      "spellcard_2_skill5_level_value": "int",
+      "spellcard_3_skill1_level_value": "int",
+      "spellcard_3_skill2_level_value": "int",
+      "spellcard_3_skill3_level_value": "int",
+      "spellcard_3_skill4_level_value": "int",
+      "spellcard_3_skill5_level_value": "int",
+      "spellcard_4_skill1_level_value": "int",
+      "spellcard_4_skill2_level_value": "int",
+      "spellcard_4_skill3_level_value": "int",
+      "spellcard_4_skill4_level_value": "int",
+      "spellcard_4_skill5_level_value": "int",
+      "spellcard_5_skill1_level_value": "int",
+      "spellcard_5_skill2_level_value": "int",
+      "spellcard_5_skill3_level_value": "int",
+      "spellcard_5_skill4_level_value": "int",
+      "spellcard_5_skill5_level_value": "int",
+      "spellcard_1_skill1_timing": "int",
+      "spellcard_1_skill2_timing": "int",
+      "spellcard_1_skill3_timing": "int",
+      "spellcard_1_skill4_timing": "int",
+      "spellcard_1_skill5_timing": "int",
+      "spellcard_2_skill1_timing": "int",
+      "spellcard_2_skill2_timing": "int",
+      "spellcard_2_skill3_timing": "int",
+      "spellcard_2_skill4_timing": "int",
+      "spellcard_2_skill5_timing": "int",
+      "spellcard_3_skill1_timing": "int",
+      "spellcard_3_skill2_timing": "int",
+      "spellcard_3_skill3_timing": "int",
+      "spellcard_3_skill4_timing": "int",
+      "spellcard_3_skill5_timing": "int",
+      "spellcard_4_skill1_timing": "int",
+      "spellcard_4_skill2_timing": "int",
+      "spellcard_4_skill3_timing": "int",
+      "spellcard_4_skill4_timing": "int",
+      "spellcard_4_skill5_timing": "int",
+      "spellcard_5_skill1_timing": "int",
+      "spellcard_5_skill2_timing": "int",
+      "spellcard_5_skill3_timing": "int",
+      "spellcard_5_skill4_timing": "int",
+      "spellcard_5_skill5_timing": "int"
+    },
+    "Picture": {
+      "expansion_rank": "int",
+      "picture_list": "List<UserPicture>"
+    },
+    "UserPicture": {
+      "user_picture_id": "long",
+      "picture_id": "int",
+      "spec_actualize": "int",
+      "potential_limitbreak": "int",
+      "equip_user_unit_id": "long",
+      "is_protection": "int",
+      "is_new": "int",
+      "parameter1_value": "int",
+      "parameter2_value": "int",
+      "picture_characteristic_group_master_id": "int"
+    },
+    "Item": {
+      "item_list": "List<UserItem>"
+    },
+    "UserItem": {
+      "item_id": "int",
+      "num": "int"
+    },
+    "Costume": {
+      "costume_id_list": "List<int>"
+    },
+    "Dispatch": {
+      "departure_rank": "int",
+      "dispatch_list": "List<UserDispatch>"
+    },
+    "UserDispatch": {
+      "user_dispatch_id": "long",
+      "dispatch_id": "int",
+      "end_time": "string",
+      "user_unit_id_list": "List<long>"
+    },
+    "LectureRoom": {
+      "unit": "LectureRoomUnit",
+      "food": "LectureRoomFood"
+    },
+    "LectureRoomUnit": {
+      "expansion_rank": "int",
+      "unit_list": "List<UserLectureRoomUnit>"
+    },
+    "UserLectureRoomUnit": {
+      "user_unit_id": "long",
+      "put_trust_up_icon": "int"
+    },
+    "LectureRoomFood": {
+      "expansion_rank": "int",
+      "food_list": "List<UserLectureRoomFood>",
+      "last_food_at": "string",
+      "food_rest_value": "int"
+    },
+    "UserLectureRoomFood": {
+      "food_id": "int",
+      "add_effect_finish_time": "string"
+    },
+    "TrainingRoom": {
+      "expansion_rank": "int",
+      "unit_list": "List<UserTrainingRoomUnit>"
+    },
+    "UserTrainingRoomUnit": {
+      "slot_number": "int",
+      "user_unit_id": "long",
+      "skill_number": "int",
+      "item_id": "int",
+      "training_start_time": "string",
+      "training_finish_time": "string"
+    },
+    "QuestPlayData": {
+      "episode_id": "int",
+      "normal": "Battle",
+      "hard": "Battle",
+      "lunatic": "Battle",
+      "scenario_status": "int"
+    },
+    "Battle": {
+      "status": "int",
+      "battle_challenge": "List<int>"
+    },
+    "Album": {
+      "unit_list": "List<AlbumUnit>",
+      "picture_list": "List<AlbumPicture>"
+    },
+    "AlbumUnit": {
+      "unit_id": "int",
+      "talk_rank": "int",
+      "voice_set_id": "int",
+      "character_episode_ids": "List<int>",
+      "home_motion_ids": "List<int>"
+    },
+    "AlbumPicture": {
+      "picture_id": "int",
+      "potential_limitbreak": "int"
+    },
+    "EventInfo": {
+      "event_id": "int",
+      "event_point": "int",
+      "event_total_point": "int",
+      "loginbonus_gain_time": "string"
+    },
+    "DailyQuestBattle": {
+      "daily_quest_stage_id": "int",
+      "normal": "Battle"
+    },
+    "DailyQuest": {
+      "daily_quest_id": "int",
+      "count": "int",
+      "cleared_info": "List<DailyQuestBattle>"
+    },
+    "EventQuest": {
+      "battle_id": "int",
+      "count": "int"
+    },
+    "ExtraQuestCountInfo": {
+      "chapter_id": "int",
+      "count": "int"
+    },
+    "CharacterQuest": {
+      "character_quest_id": "int",
+      "count": "int",
+      "normal": "Battle",
+      "hard": "Battle",
+      "lunatic": "Battle"
+    },
+    "RelicQuest": {
+      "relic_quest_id": "int",
+      "normal": "Battle",
+      "hard": "Battle",
+      "lunatic": "Battle"
+    },
+    "TwitterInfo": {
+      "is_related": "int"
+    },
+    "FigurePresent": {
+      "rest_days": "int",
+      "applied": "int"
+    },
+    "AnniversaryPresent": {
+      "rest_days": "int",
+      "applied": "int"
+    },
+    "Delivery": {
+      "delivery_id": "int",
+      "rest_days": "int"
+    },
+    "Tower": {
+      "cleared_floor": "int",
+      "exist_data": "uint"
+    },
+    "RouletteGachaCount": {
+      "gacha_id": "int",
+      "count": "int"
+    },
+    "BGMItem": {
+      "received_bgm_item_id_list": "List<int>",
+      "long_bgm_id_list": "List<int>",
+      "short_bgm_id_list": "List<int>"
+    },
+    "RetryGachaData": {
+      "gacha_id": "int",
+      "event_id": "int",
+      "total_count": "int",
+      "count": "int",
+      "object_type": "int",
+      "object_id": "int",
+      "is_fix": "int"
+    },
+    "StepUpGachaCount": {
+      "gacha_id": "int",
+      "step_num": "int"
+    },
+    "HomeUnitInfo": {
+      "unit_param": "List<HomeUnitInfoParam>",
+      "select_unit_index": "int",
+      "random_select_mode": "int"
+    },
+    "HomeUnitInfoParam": {
+      "unit_id": "int",
+      "user_unit_id": "long",
+      "costume_id": "int",
+      "home_motion": "int",
+      "bgm": "int"
+    },
+    "ComicData": {
+      "comic_id": "int",
+      "received_page_count": "int",
+      "rad_page_count": "int"
+    },
+    "SeriesBattleStatus": {
+      "episode_id": "int",
+      "difficulty": "int",
+      "progress": "int",
+      "stage_group_master_id": "int",
+      "manage_id": "int",
+      "value1": "int",
+      "use_replays": "List<int>"
+    },
+    "BattlePassStatus": {
+      "battle_pass_id": "int",
+      "is_premium": "int",
+      "is_premium_2": "int",
+      "battle_pass_level": "int",
+      "battle_pass_exp": "int"
+    },
+    "Achievement": {
+      "selected_achievement_id": "int",
+      "recently_received_achievement_id_list": "List<int>"
+    },
+    "AbilityCard": {
+      "ability_seal_list": "List<AbilityCardData>"
+    },
+    "AbilityCardData": {
+      "ability_seal_id": "int",
+      "num": "int"
+    },
+    "AbilitySealDeck": {
+      "deck_no": "int",
+      "deck_list": "List<int>",
+      "deck_name": "string"
+    },
+    "AutoReplay": {
+      "quest_type": "long",
+      "target_id": "long",
+      "difficulty": "long",
+      "end_at": "string",
+      "is_forced_end": "long",
+      "execute_num": "long",
+      "win_rate": "long"
+    },
+    "PointAllocationInfo": {
+      "pa_type_1": "int",
+      "pa_type_2": "int",
+      "pa_type_3": "int",
+      "pa_type_4": "int",
+      "pa_type_5": "int",
+      "pa_type_6": "int",
+      "pa_type_7": "int",
+      "pa_type_8": "int",
+      "pa_type_9": "int",
+      "pa_points": "int",
+      "pa_total_used_points": "int",
+      "is_pa_reset_not_free": "int"
+    }
+  },
+  "offsets": {
+    "UserImpl": {
+      "player_name": 16,
+      "hero_name": 24,
+      "comment": 32,
+      "level": 40,
+      "exp": 48,
+      "favorite": 56,
+      "phantasm_point": 64,
+      "phantasm_box": 72,
+      "gold": 80,
+      "gold_box": 88,
+      "orb": 96,
+      "piece": 104,
+      "crystal": 108,
+      "fortune_powder": 112,
+      "team": 120,
+      "unit": 128,
+      "picture": 136,
+      "item": 144,
+      "costume": 152,
+      "dispatch": 160,
+      "lecture_room": 168,
+      "training_room": 176,
+      "quest_playdata": 184,
+      "extra_quest_count": 192,
+      "event_extra_quest_count": 196,
+      "another_extra_quest_count": 200,
+      "yukkuri_extra_quest_count": 204,
+      "extra_quest_count_info": 208,
+      "album": 216,
+      "point": 224,
+      "loginbonus_gain_time": 232,
+      "event_info": 240,
+      "daily_quest_count_list": 248,
+      "event_quest_count_list": 256,
+      "character_quest_list": 264,
+      "relic_quest_list": 272,
+      "unit_voice_autoset": 280,
+      "age_limit_type": 284,
+      "is_FdOpen": 288,
+      "progress_value": 312,
+      "figure_present": 320,
+      "anniversary_present": 328,
+      "delivery_list": 336,
+      "do_cache_delete": 344,
+      "tower": 352,
+      "roulette_gacha_count": 360,
+      "select_bgm": 368,
+      "bgm_item": 376,
+      "last_free_item_gain_at": 384,
+      "retry_gacha_count": 392,
+      "step_up_gacha_count": 400,
+      "home_unit_info": 408,
+      "comic_point": 416,
+      "comic_data": 424,
+      "weekly_arena_user_unit_list": 432,
+      "gained_friend_point": 440,
+      "friend_used_count": 444,
+      "non_friend_used_count": 448,
+      "current_friend_point": 452,
+      "helper_used_histories": 456,
+      "helper_user_unit_id1": 464,
+      "first_clear": 472,
+      "series_battle_status": 480,
+      "battle_pass": 488,
+      "achievement": 496,
+      "arena_point": 504,
+      "mop_up_coupon": 508,
+      "mop_up_day_coupon": 512,
+      "avatar_filename": 520,
+      "avatar_desc": 528,
+      "avatar_title": 536,
+      "avatar_id": 544,
+      "HeadListItemList": 552,
+      "isShowRedPoint": 560,
+      "QstinfState": 564,
+      "shopRedPoint": 568,
+      "guideTipsIsShow": 569,
+      "ability_seal": 576,
+      "auto_replay": 584,
+      "roguelite_uuid_list": 592,
+      "roguelite_cleared_map_id_list": 600,
+      "is_roguelite_top_init": 608,
+      "is_roguelite_in_progress": 612
+    },
+    "Favorite": {
+      "user_unit_id": 16,
+      "operated_at": 24
+    },
+    "PhantasmPoint": {
+      "points": 16,
+      "purchase_count": 20
+    },
+    "PhantasmBox": {
+      "level": 16,
+      "renovation_finish_time": 24,
+      "full_stock_time": 32
+    },
+    "GoldBox": {
+      "level": 16,
+      "renovation_finish_time": 24,
+      "full_stock_time": 32
+    },
+    "Orb": {
+      "free": 16,
+      "purchased": 20
+    },
+    "Team": {
+      "team_list": 16
+    },
+    "UserTeam": {
+      "number": 16,
+      "name": 24,
+      "user_unit_id_list": 32,
+      "use_cost": 40,
+      "season_enhancement_user_unit_id_list": 48
+    },
+    "Unit": {
+      "expansion_rank": 16,
+      "unit_list": 24,
+      "tower_unit_list": 32
+    },
+    "UserUnit": {
+      "user_unit_id": 32,
+      "unit_id": 40,
+      "exp": 48,
+      "level": 56,
+      "level_limitbreak": 60,
+      "rank": 64,
+      "reincarnation_state": 68,
+      "reincarnation_stage": 72,
+      "rare": 76,
+      "trust": 80,
+      "last_trust_at": 88,
+      "is_lecture": 96,
+      "motivation": 100,
+      "last_motivation_at": 104,
+      "is_favorite": 112,
+      "add_life_point": 116,
+      "add_yang_attack": 120,
+      "add_yang_defense": 124,
+      "add_yin_attack": 128,
+      "add_yin_defense": 132,
+      "add_speed": 136,
+      "is_set_rank_promote_slot1": 140,
+      "is_set_rank_promote_slot2": 144,
+      "is_set_rank_promote_slot3": 148,
+      "is_set_rank_promote_slot4": 152,
+      "is_set_rank_promote_slot5": 156,
+      "is_set_rank_promote_slot6": 160,
+      "equip_spellcard1_user_picture_id": 168,
+      "equip_spellcard2_user_picture_id": 176,
+      "equip_spellcard3_user_picture_id": 184,
+      "equip_spellcard4_user_picture_id": 192,
+      "equip_spellcard5_user_picture_id": 200,
+      "skill1_level": 208,
+      "skill1_exp": 216,
+      "skill2_level": 224,
+      "skill2_exp": 232,
+      "skill3_level": 240,
+      "skill3_exp": 248,
+      "equip_costume_id": 256,
+      "is_protection": 260,
+      "is_new": 264,
+      "select_bgm": 268,
+      "release_functions": 272,
+      "home_motion": 280,
+      "strong_fragrant_wood": 288,
+      "strong_fragrant_wood_limit_info": 296,
+      "enhanced_skill": 304,
+      "enhanced_characteristic": 312,
+      "enhanced_shot": 320,
+      "release_spellcard": 328,
+      "enhanced_spellcard": 336,
+      "destiny_value": 344,
+      "point_allocation_info": 352
+    },
+    "StrongFragrantWood": {
+      "type_1": 16,
+      "type_2": 20,
+      "type_3": 24,
+      "type_4": 28,
+      "type_5": 32,
+      "type_6": 36,
+      "add_life_point": 40,
+      "add_yang_attack": 44,
+      "add_yang_defense": 48,
+      "add_yin_attack": 52,
+      "add_yin_defense": 56,
+      "add_speed": 60
+    },
+    "StrongFragrantWoodLimitInfo": {
+      "type_1": 16,
+      "type_2": 20,
+      "type_3": 24,
+      "type_4": 28,
+      "type_5": 32,
+      "type_6": 36,
+      "reincarnation_stage": 40,
+      "life_point": 44,
+      "yang_attack": 48,
+      "yang_defense": 52,
+      "yin_attack": 56,
+      "yin_defense": 60,
+      "speed": 64,
+      "limitbreak_params": 72
+    },
+    "EnhancedSkill": {
+      "skill1_id": 16,
+      "skill2_id": 20,
+      "skill3_id": 24
+    },
+    "EnhancedhCaracteristic": {
+      "characteristic1_id": 16,
+      "characteristic2_id": 20,
+      "characteristic3_id": 24
+    },
+    "EnhancedShot": {
+      "shot_a_magazine0_bullet_id": 16,
+      "shot_a_magazine1_bullet_id": 20,
+      "shot_a_magazine2_bullet_id": 24,
+      "shot_a_magazine3_bullet_id": 28,
+      "shot_a_magazine4_bullet_id": 32,
+      "shot_a_magazine5_bullet_id": 36,
+      "shot_b_magazine0_bullet_id": 40,
+      "shot_b_magazine1_bullet_id": 44,
+      "shot_b_magazine2_bullet_id": 48,
+      "shot_b_magazine3_bullet_id": 52,
+      "shot_b_magazine4_bullet_id": 56,
+      "shot_b_magazine5_bullet_id": 60
+    },
+    "EnhancedSpellcard": {
+      "spellcard_1_magazine0_bullet_id": 16,
+      "spellcard_1_magazine1_bullet_id": 20,
+      "spellcard_1_magazine2_bullet_id": 24,
+      "spellcard_1_magazine3_bullet_id": 28,
+      "spellcard_1_magazine4_bullet_id": 32,
+      "spellcard_1_magazine5_bullet_id": 36,
+      "spellcard_2_magazine0_bullet_id": 40,
+      "spellcard_2_magazine1_bullet_id": 44,
+      "spellcard_2_magazine2_bullet_id": 48,
+      "spellcard_2_magazine3_bullet_id": 52,
+      "spellcard_2_magazine4_bullet_id": 56,
+      "spellcard_2_magazine5_bullet_id": 60,
+      "spellcard_3_magazine0_bullet_id": 64,
+      "spellcard_3_magazine1_bullet_id": 68,
+      "spellcard_3_magazine2_bullet_id": 72,
+      "spellcard_3_magazine3_bullet_id": 76,
+      "spellcard_3_magazine4_bullet_id": 80,
+      "spellcard_3_magazine5_bullet_id": 84,
+      "spellcard_4_magazine0_bullet_id": 88,
+      "spellcard_4_magazine1_bullet_id": 92,
+      "spellcard_4_magazine2_bullet_id": 96,
+      "spellcard_4_magazine3_bullet_id": 100,
+      "spellcard_4_magazine4_bullet_id": 104,
+      "spellcard_4_magazine5_bullet_id": 108,
+      "spellcard_5_magazine0_bullet_id": 112,
+      "spellcard_5_magazine1_bullet_id": 116,
+      "spellcard_5_magazine2_bullet_id": 120,
+      "spellcard_5_magazine3_bullet_id": 124,
+      "spellcard_5_magazine4_bullet_id": 128,
+      "spellcard_5_magazine5_bullet_id": 132,
+      "spellcard_1_skill1_effect_id": 136,
+      "spellcard_1_skill2_effect_id": 140,
+      "spellcard_1_skill3_effect_id": 144,
+      "spellcard_1_skill4_effect_id": 148,
+      "spellcard_1_skill5_effect_id": 152,
+      "spellcard_2_skill1_effect_id": 156,
+      "spellcard_2_skill2_effect_id": 160,
+      "spellcard_2_skill3_effect_id": 164,
+      "spellcard_2_skill4_effect_id": 168,
+      "spellcard_2_skill5_effect_id": 172,
+      "spellcard_3_skill1_effect_id": 176,
+      "spellcard_3_skill2_effect_id": 180,
+      "spellcard_3_skill3_effect_id": 184,
+      "spellcard_3_skill4_effect_id": 188,
+      "spellcard_3_skill5_effect_id": 192,
+      "spellcard_4_skill1_effect_id": 196,
+      "spellcard_4_skill2_effect_id": 200,
+      "spellcard_4_skill3_effect_id": 204,
+      "spellcard_4_skill4_effect_id": 208,
+      "spellcard_4_skill5_effect_id": 212,
+      "spellcard_5_skill1_effect_id": 216,
+      "spellcard_5_skill2_effect_id": 220,
+      "spellcard_5_skill3_effect_id": 224,
+      "spellcard_5_skill4_effect_id": 228,
+      "spellcard_5_skill5_effect_id": 232,
+      "spellcard_1_skill1_level_type": 236,
+      "spellcard_1_skill2_level_type": 240,
+      "spellcard_1_skill3_level_type": 244,
+      "spellcard_1_skill4_level_type": 248,
+      "spellcard_1_skill5_level_type": 252,
+      "spellcard_2_skill1_level_type": 256,
+      "spellcard_2_skill2_level_type": 260,
+      "spellcard_2_skill3_level_type": 264,
+      "spellcard_2_skill4_level_type": 268,
+      "spellcard_2_skill5_level_type": 272,
+      "spellcard_3_skill1_level_type": 276,
+      "spellcard_3_skill2_level_type": 280,
+      "spellcard_3_skill3_level_type": 284,
+      "spellcard_3_skill4_level_type": 288,
+      "spellcard_3_skill5_level_type": 292,
+      "spellcard_4_skill1_level_type": 296,
+      "spellcard_4_skill2_level_type": 300,
+      "spellcard_4_skill3_level_type": 304,
+      "spellcard_4_skill4_level_type": 308,
+      "spellcard_4_skill5_level_type": 312,
+      "spellcard_5_skill1_level_type": 316,
+      "spellcard_5_skill2_level_type": 320,
+      "spellcard_5_skill3_level_type": 324,
+      "spellcard_5_skill4_level_type": 328,
+      "spellcard_5_skill5_level_type": 332,
+      "spellcard_1_skill1_level_value": 336,
+      "spellcard_1_skill2_level_value": 340,
+      "spellcard_1_skill3_level_value": 344,
+      "spellcard_1_skill4_level_value": 348,
+      "spellcard_1_skill5_level_value": 352,
+      "spellcard_2_skill1_level_value": 356,
+      "spellcard_2_skill2_level_value": 360,
+      "spellcard_2_skill3_level_value": 364,
+      "spellcard_2_skill4_level_value": 368,
+      "spellcard_2_skill5_level_value": 372,
+      "spellcard_3_skill1_level_value": 376,
+      "spellcard_3_skill2_level_value": 380,
+      "spellcard_3_skill3_level_value": 384,
+      "spellcard_3_skill4_level_value": 388,
+      "spellcard_3_skill5_level_value": 392,
+      "spellcard_4_skill1_level_value": 396,
+      "spellcard_4_skill2_level_value": 400,
+      "spellcard_4_skill3_level_value": 404,
+      "spellcard_4_skill4_level_value": 408,
+      "spellcard_4_skill5_level_value": 412,
+      "spellcard_5_skill1_level_value": 416,
+      "spellcard_5_skill2_level_value": 420,
+      "spellcard_5_skill3_level_value": 424,
+      "spellcard_5_skill4_level_value": 428,
+      "spellcard_5_skill5_level_value": 432,
+      "spellcard_1_skill1_timing": 436,
+      "spellcard_1_skill2_timing": 440,
+      "spellcard_1_skill3_timing": 444,
+      "spellcard_1_skill4_timing": 448,
+      "spellcard_1_skill5_timing": 452,
+      "spellcard_2_skill1_timing": 456,
+      "spellcard_2_skill2_timing": 460,
+      "spellcard_2_skill3_timing": 464,
+      "spellcard_2_skill4_timing": 468,
+      "spellcard_2_skill5_timing": 472,
+      "spellcard_3_skill1_timing": 476,
+      "spellcard_3_skill2_timing": 480,
+      "spellcard_3_skill3_timing": 484,
+      "spellcard_3_skill4_timing": 488,
+      "spellcard_3_skill5_timing": 492,
+      "spellcard_4_skill1_timing": 496,
+      "spellcard_4_skill2_timing": 500,
+      "spellcard_4_skill3_timing": 504,
+      "spellcard_4_skill4_timing": 508,
+      "spellcard_4_skill5_timing": 512,
+      "spellcard_5_skill1_timing": 516,
+      "spellcard_5_skill2_timing": 520,
+      "spellcard_5_skill3_timing": 524,
+      "spellcard_5_skill4_timing": 528,
+      "spellcard_5_skill5_timing": 532
+    },
+    "Picture": {
+      "expansion_rank": 16,
+      "picture_list": 24
+    },
+    "UserPicture": {
+      "user_picture_id": 16,
+      "picture_id": 24,
+      "spec_actualize": 28,
+      "potential_limitbreak": 32,
+      "equip_user_unit_id": 40,
+      "is_protection": 48,
+      "is_new": 52,
+      "parameter1_value": 56,
+      "parameter2_value": 60,
+      "picture_characteristic_group_master_id": 64
+    },
+    "Item": {
+      "item_list": 16
+    },
+    "UserItem": {
+      "item_id": 16,
+      "num": 20
+    },
+    "Costume": {
+      "costume_id_list": 16
+    },
+    "Dispatch": {
+      "departure_rank": 16,
+      "dispatch_list": 24
+    },
+    "UserDispatch": {
+      "user_dispatch_id": 16,
+      "dispatch_id": 24,
+      "end_time": 32,
+      "user_unit_id_list": 40
+    },
+    "LectureRoom": {
+      "unit": 16,
+      "food": 24
+    },
+    "LectureRoomUnit": {
+      "expansion_rank": 16,
+      "unit_list": 24
+    },
+    "UserLectureRoomUnit": {
+      "user_unit_id": 16,
+      "put_trust_up_icon": 24
+    },
+    "LectureRoomFood": {
+      "expansion_rank": 16,
+      "food_list": 24,
+      "last_food_at": 32,
+      "food_rest_value": 40
+    },
+    "UserLectureRoomFood": {
+      "food_id": 16,
+      "add_effect_finish_time": 24
+    },
+    "TrainingRoom": {
+      "expansion_rank": 16,
+      "unit_list": 24
+    },
+    "UserTrainingRoomUnit": {
+      "slot_number": 16,
+      "user_unit_id": 24,
+      "skill_number": 32,
+      "item_id": 36,
+      "training_start_time": 40,
+      "training_finish_time": 48
+    },
+    "QuestPlayData": {
+      "episode_id": 16,
+      "normal": 24,
+      "hard": 32,
+      "lunatic": 40,
+      "scenario_status": 48
+    },
+    "Battle": {
+      "status": 16,
+      "battle_challenge": 24
+    },
+    "Album": {
+      "unit_list": 16,
+      "picture_list": 24
+    },
+    "AlbumUnit": {
+      "unit_id": 16,
+      "talk_rank": 20,
+      "voice_set_id": 24,
+      "character_episode_ids": 32,
+      "home_motion_ids": 40
+    },
+    "AlbumPicture": {
+      "picture_id": 16,
+      "potential_limitbreak": 20
+    },
+    "EventInfo": {
+      "event_id": 16,
+      "event_point": 20,
+      "event_total_point": 24,
+      "loginbonus_gain_time": 32
+    },
+    "DailyQuestBattle": {
+      "daily_quest_stage_id": 16,
+      "normal": 24
+    },
+    "DailyQuest": {
+      "daily_quest_id": 16,
+      "count": 20,
+      "cleared_info": 24
+    },
+    "EventQuest": {
+      "battle_id": 16,
+      "count": 20
+    },
+    "ExtraQuestCountInfo": {
+      "chapter_id": 16,
+      "count": 20
+    },
+    "CharacterQuest": {
+      "character_quest_id": 16,
+      "count": 20,
+      "normal": 24,
+      "hard": 32,
+      "lunatic": 40
+    },
+    "RelicQuest": {
+      "relic_quest_id": 16,
+      "normal": 24,
+      "hard": 32,
+      "lunatic": 40
+    },
+    "TwitterInfo": {
+      "is_related": 16
+    },
+    "FigurePresent": {
+      "rest_days": 16,
+      "applied": 20
+    },
+    "AnniversaryPresent": {
+      "rest_days": 16,
+      "applied": 20
+    },
+    "Delivery": {
+      "delivery_id": 16,
+      "rest_days": 20
+    },
+    "Tower": {
+      "cleared_floor": 16,
+      "exist_data": 20
+    },
+    "RouletteGachaCount": {
+      "gacha_id": 16,
+      "count": 20
+    },
+    "BGMItem": {
+      "received_bgm_item_id_list": 16,
+      "long_bgm_id_list": 24,
+      "short_bgm_id_list": 32
+    },
+    "RetryGachaData": {
+      "gacha_id": 16,
+      "event_id": 20,
+      "total_count": 24,
+      "count": 28,
+      "object_type": 32,
+      "object_id": 36,
+      "is_fix": 40
+    },
+    "StepUpGachaCount": {
+      "gacha_id": 16,
+      "step_num": 20
+    },
+    "HomeUnitInfo": {
+      "unit_param": 16,
+      "select_unit_index": 24,
+      "random_select_mode": 28
+    },
+    "HomeUnitInfoParam": {
+      "unit_id": 16,
+      "user_unit_id": 24,
+      "costume_id": 32,
+      "home_motion": 36,
+      "bgm": 40
+    },
+    "ComicData": {
+      "comic_id": 16,
+      "received_page_count": 20,
+      "rad_page_count": 24
+    },
+    "SeriesBattleStatus": {
+      "episode_id": 16,
+      "difficulty": 20,
+      "progress": 24,
+      "stage_group_master_id": 28,
+      "manage_id": 32,
+      "value1": 36,
+      "use_replays": 40
+    },
+    "BattlePassStatus": {
+      "battle_pass_id": 16,
+      "is_premium": 20,
+      "is_premium_2": 24,
+      "battle_pass_level": 28,
+      "battle_pass_exp": 32
+    },
+    "Achievement": {
+      "selected_achievement_id": 16,
+      "recently_received_achievement_id_list": 24
+    },
+    "AbilityCard": {
+      "ability_seal_list": 16
+    },
+    "AbilityCardData": {
+      "ability_seal_id": 16,
+      "num": 20
+    },
+    "AbilitySealDeck": {
+      "deck_no": 16,
+      "deck_list": 24,
+      "deck_name": 32
+    },
+    "AutoReplay": {
+      "quest_type": 16,
+      "target_id": 24,
+      "difficulty": 32,
+      "end_at": 40,
+      "is_forced_end": 48,
+      "execute_num": 56,
+      "win_rate": 64
+    },
+    "PointAllocationInfo": {
+      "pa_type_1": 24,
+      "pa_type_2": 28,
+      "pa_type_3": 32,
+      "pa_type_4": 36,
+      "pa_type_5": 40,
+      "pa_type_6": 44,
+      "pa_type_7": 48,
+      "pa_type_8": 52,
+      "pa_type_9": 56,
+      "pa_points": 60,
+      "pa_total_used_points": 64,
+      "is_pa_reset_not_free": 68
+    }
+  },
+  "user_type_rva": 72753216,
+  "libil2cpp_sha256": "a76f9975f98b75d1d1afe20c76be4ab5f424a027d3f0d05c526ee35f8c208aff"
+}
