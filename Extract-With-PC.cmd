@@ -1,3 +1,3 @@
 @echo off
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Export-OriginalSave.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Run-Extraction.ps1"
 pause

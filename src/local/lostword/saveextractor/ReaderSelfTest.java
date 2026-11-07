@@ -15,6 +15,9 @@ public final class ReaderSelfTest {
         require(!ReaderMain.isGamePackage("local.lostword.saveextractor"));
         require(!ReaderMain.isGamePackage("com.gg.lostword.mi;id"));
         ReaderMain r=new ReaderMain(args[0]);File temp=new File(args[1],"reader-self-test-memory.bin");
+        require(ReaderMain.selectProfile(r.layout,"20b413be9b98db827cc84d6836c2e6fa98a6de3c221e6b1295044a4974f9ee43").getLong("user_type_rva")==72749120L);
+        require(ReaderMain.selectProfile(r.layout,r.layout.getString("libil2cpp_sha256")).getLong("user_type_rva")==72753216L);
+        require(ReaderMain.selectProfile(r.layout,"unknown")==null);
         ByteBuffer b=ByteBuffer.allocate(8192).order(ByteOrder.LITTLE_ENDIAN);
         b.putInt(0x100,-23);b.putLong(0x108,9007199254740993L);b.put(0x110,(byte)1);b.putFloat(0x114,0.25f);
         b.putLong(0x120,0x300);b.putInt(0x310,2);b.putChar(0x314,'测');b.putChar(0x316,'试');

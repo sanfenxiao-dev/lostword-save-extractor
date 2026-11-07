@@ -1220,5 +1220,12 @@
     }
   },
   "user_type_rva": 72753216,
-  "libil2cpp_sha256": "a76f9975f98b75d1d1afe20c76be4ab5f424a027d3f0d05c526ee35f8c208aff"
+  "libil2cpp_sha256": "a76f9975f98b75d1d1afe20c76be4ab5f424a027d3f0d05c526ee35f8c208aff",
+  "compatible_libraries": [
+    {
+      "client": "xiaomi-6.6.0-arm64",
+      "libil2cpp_sha256": "20b413be9b98db827cc84d6836c2e6fa98a6de3c221e6b1295044a4974f9ee43",
+      "user_type_rva": 72749120
+    }
+  ]
 }

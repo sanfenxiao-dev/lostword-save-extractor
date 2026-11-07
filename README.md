@@ -1,15 +1,15 @@
-# 归言录原版存档提取器 0.2.1
+# 归言录原版存档提取器 0.2.2
 
 用于提取自己已经登录的东方归言录玩家数据，再导入个人私服的存档位。APK 无联网权限，不自动上传文件，不需要输入 B站密码，也不读取登录令牌。不会修改原版游戏、原版存档或向官方服务器发请求。
 
 ## 下载
 
-- [下载 APK](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.1.apk)
-- [完整工具包：APK + 自动发现模拟器的电脑脚本](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.1.zip)
+- [下载 APK](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.2.apk)
+- [完整工具包：APK + 自动发现模拟器的电脑脚本](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.2.zip)
 
 ## 手机 / 有 su 的模拟器
 
-1. 安装 `lostword-save-extractor-0.2.1.apk`。需要 Android 8.0 或以上、Root，以及已验证版本的 B服 6.6.0 ARM64 客户端。
+1. 安装 `lostword-save-extractor-0.2.2.apk`。需要 Android 8.0 或以上、Root，以及随附布局支持的 ARM64 客户端。
 2. 自己打开原版 LostWord 客户端，登录到主页并等数据同步完成；提取期间不要打关卡、领奖、抽卡或切换账号。
 3. 返回「归言录存档提取」，点击「读取原版存档」，在 Root 管理器中允许授权。
 4. 成功后核对玩家名、等级、角色和绘卷数量，点击「保存存档文件…」，选择本机保存位置。
@@ -21,7 +21,7 @@
 
 MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su。这时使用包内电脑辅助脚本：
 
-1. 打开 MuMu 的 Root 权限，按模拟器要求重启；自己登录原版 B服到主页。
+1. 打开 MuMu 的 Root 权限，按模拟器要求重启；自己登录原版游戏到主页。
 2. 把压缩包解压到同一个文件夹，运行 `Extract-With-PC.cmd`。
 3. 脚本会安装独立提取器并调用其同一套读取代码，不启动或点击原版游戏。完成后，JSON 保存在脚本所在目录。
 4. 将 JSON 上传到自己的私服存档位。
@@ -41,13 +41,13 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 .\Export-OriginalSave.ps1 -AdbPath 'E:\leidian\LDPlayer9\adb.exe' -GamePackage 'com.gg.lostword.mi'
 ```
 
-多个设备在线时，使用提示里的编号传入 `-Serial`；多个游戏同时运行时，用 `-GamePackage` 选择，手机端请仅保留一个游戏运行。下载后使用完整的 0.2.1 工具包，旧 APK 仍固定 B服，不能只更新脚本。
+多个设备在线时，使用提示里的编号传入 `-Serial`；多个游戏同时运行时，用 `-GamePackage` 选择，手机端请仅保留一个游戏运行。下载后使用完整的 0.2.2 工具包，旧 APK 不包含小米服定位配置，不能只更新脚本。
 
 ## 渠道与版本兼容范围
 
 自动发现包名中包含 `lostword` 的客户端（排除本提取器），包含小米服 `com.gg.lostword.mi`、B服及其他渠道。名称识别不是游戏身份或数据布局的证明：读取前必须通过核心库 SHA256 校验。
 
-当前随附布局仅核验过 B服 6.6.0 ARM64。其他渠道只有在核心库与该布局完全一致时才进入读取；不一致时显示目标包名及核心库哈希并停止，不猜测偏移。**尚未实测小米服，也不能保证所有渠道、国际服、32 位或未来版本可导出。** 适配新核心库需要核对其字段结构后更新布局，不能删除校验强行读取。
+当前包含 B服 6.6.0 ARM64 和小米服 6.6.0 ARM64 两份核心库定位配置。小米服已静态核对全部 484 个导出字段，类型及偏移一致，独立配置修正 User_TypeInfo 地址；尚待真实玩家数据提取验证。其他渠道需匹配已知核心库，未知核心库默认停止。不能保证所有渠道、国际服、32 位或未来版本可导出。
 
 ## 数据范围
 
@@ -68,7 +68,7 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 - 已修复 Windows PowerShell 5.1 把 ADB 成功进度误判为错误的问题；回归测试保留非零退出码报错。
 
 
-## 0.2.1 验证
+## 0.2.2 验证
 
 参见 [更新记录](CHANGELOG.md)。脚本回归：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-Adb.ps1`。完整流程模拟测试：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-Flow.ps1`。APK 编译、签名及 Android 合成数据测试通过；新版各渠道和端口发现仍需对应真实环境验证。
 

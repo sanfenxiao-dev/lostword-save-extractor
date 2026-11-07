@@ -13,6 +13,15 @@ import java.util.zip.ZipFile;
 public final class ReaderMain {
     String sourcePackage="";
     boolean allowUnverifiedLibrary=false;
+    static JSONObject selectProfile(JSONObject layout,String hash)throws Exception {
+        if(hash.equals(layout.getString("libil2cpp_sha256")))return layout;
+        JSONArray profiles=layout.optJSONArray("compatible_libraries");
+        if(profiles!=null)for(int i=0;i<profiles.length();i++){
+            JSONObject profile=profiles.getJSONObject(i);
+            if(hash.equals(profile.getString("libil2cpp_sha256")))return profile;
+        }
+        return null;
+    }
     static boolean isGamePackage(String name){
         return name.matches("[A-Za-z0-9_]+(?:\\.[A-Za-z0-9_]+)+") &&
             name.toLowerCase(Locale.ROOT).contains("lostword") && !name.startsWith("local.lostword.");
@@ -144,7 +153,9 @@ public final class ReaderMain {
         if(lib==null)throw new IOException("未找到支持的 64 位原版客户端，请确认已进入主页");
         status(out,"正在核对原版程序版本…");
         String actualHash=hashFile(lib);
-        boolean libraryVerified=actualHash.equals(layout.getString("libil2cpp_sha256"));
+        JSONObject profile=selectProfile(layout,actualHash);
+        boolean libraryVerified=profile!=null;
+        if(profile!=null)layout.put("user_type_rva",profile.getLong("user_type_rva"));
         if(!libraryVerified&&!allowUnverifiedLibrary)throw new IOException("此核心库尚未适配，已停止读取。包名："+sourcePackage+"；libil2cpp SHA256："+actualHash+"。可用电脑脚本 -AllowUnverifiedLibrary 实验读取；布局未经验证");
         if(!libraryVerified)System.err.println("WARNING: experimental layout; library hash not verified. Validate exported data manually.");
         status(out,"正在读取第一份玩家快照…");JSONObject first=capture(pid,bases);
