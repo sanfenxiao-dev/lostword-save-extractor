@@ -1,5 +1,7 @@
-param([string]$AdbPath,[string]$Serial,[string]$GamePackage,[string]$OutputDirectory=$PSScriptRoot)
+﻿param([string]$AdbPath,[string]$Serial,[string]$GamePackage,[string]$OutputDirectory=$PSScriptRoot,[switch]$AllowUnverifiedLibrary)
 $ErrorActionPreference='Stop'
+[Console]::OutputEncoding=New-Object System.Text.UTF8Encoding($false)
+$OutputEncoding=[Console]::OutputEncoding
 $Serial=$Serial.Trim()
 $GamePackage=$GamePackage.Trim()
 if ($GamePackage -and $GamePackage -notmatch '^[A-Za-z0-9_]+(\.[A-Za-z0-9_]+)+$') {throw 'Invalid game package.'}
@@ -74,8 +76,8 @@ if (-not $Serial) {
 }
 if ($Serial -notin $devices) {throw "Device '$Serial' is not online. Online devices: $($devices -join ', ')"}
 Write-Host "ADB: $AdbPath | Device: $Serial"
-$apk=Join-Path $PSScriptRoot 'lostword-save-extractor-0.2.0.apk'
-if (-not (Test-Path -LiteralPath $apk)) {throw 'Place this script next to lostword-save-extractor-0.2.0.apk (use the complete updated tool bundle).'}
+$apk=Join-Path $PSScriptRoot 'lostword-save-extractor-0.2.1.apk'
+if (-not (Test-Path -LiteralPath $apk)) {throw 'Place this script next to lostword-save-extractor-0.2.1.apk (use the complete updated tool bundle).'}
 $null=Invoke-Adb @('install','-r',$apk)
 $identity=Invoke-Adb @('shell','id')
 if ($identity -notmatch 'uid=0\b') {
@@ -94,6 +96,10 @@ $destination="$remote/original-save.json"
 $null=Invoke-Adb @('shell',"rm -f $destination $remote/capture-status.txt")
 $command="CLASSPATH=$packagePath /system/bin/app_process /system/bin local.lostword.saveextractor.ReaderMain $packagePath $destination"
 if ($GamePackage) {$command+=" $GamePackage"}
+if ($AllowUnverifiedLibrary) {
+    Write-Warning 'Experimental layout: library hash verification disabled. Check all exported data before importing into an empty slot.'
+    $command+=' --allow-unverified-library'
+}
 try {$null=Invoke-Adb @('shell',$command)}
 catch {
     $originalError=$_.Exception.Message

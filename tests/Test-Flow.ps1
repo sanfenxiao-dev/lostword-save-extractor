@@ -25,7 +25,7 @@ public class FakeAdb {
     if(cmd.Contains(" install "))return 0;
     if(cmd.EndsWith("shell id")){Console.WriteLine("uid=0(root)");return 0;}
     if(cmd.Contains("pm path")){Console.WriteLine("package:/data/app/test/base.apk");return 0;}
-    if(cmd.Contains("ReaderMain"))return mode=="reader-fail"?1:0;
+    if(cmd.Contains("ReaderMain")){if(mode=="experimental"&&!cmd.EndsWith("com.gg.lostword.mi --allow-unverified-library"))return 2; if(mode=="success"&&cmd.Contains("--allow-unverified-library"))return 2; return mode=="reader-fail"?1:0;}
     if(cmd.Contains("capture-status.txt")&&cmd.Contains(" cat ")){Console.WriteLine("Unsupported core hash: test");return 0;}
     if(cmd.Contains(" pull ")){File.WriteAllText(input[input.Length-1],"{}");return 0;}
     return 0;
@@ -34,15 +34,16 @@ public class FakeAdb {
 '@
     $script=Join-Path $temp 'Export-OriginalSave.ps1'
     Copy-Item (Join-Path (Split-Path $PSScriptRoot) 'Export-OriginalSave.ps1') $script
-    Set-Content (Join-Path $temp 'lostword-save-extractor-0.2.0.apk') 'mock'
+    Set-Content (Join-Path $temp 'lostword-save-extractor-0.2.1.apk') 'mock'
     function Get-Process { [pscustomobject]@{ProcessName='MuMu';Id=4242;Path=$fake} }
     function Get-NetTCPConnection { [pscustomobject]@{OwningProcess=4242;LocalAddress='127.0.0.1';LocalPort=16384} }
-    foreach ($mode in @('success','discovery','multiple','none','reader-fail','explicit')) {
+    foreach ($mode in @('success','discovery','multiple','none','reader-fail','explicit','experimental')) {
         $env:LOSTWORD_TEST_MODE=$mode
         if (Test-Path $env:LOSTWORD_TEST_STATE) {Remove-Item -LiteralPath $env:LOSTWORD_TEST_STATE}
         $failure=''
         try {
-            if ($mode -eq 'explicit') {& $script -AdbPath $fake -Serial ' emulator-5554 ' -GamePackage 'com.gg.lostword.mi' -OutputDirectory $temp | Out-Null}
+            if ($mode -eq 'experimental') {& $script -AdbPath $fake -GamePackage 'com.gg.lostword.mi' -AllowUnverifiedLibrary -OutputDirectory $temp | Out-Null}
+            elseif ($mode -eq 'explicit') {& $script -AdbPath $fake -Serial ' emulator-5554 ' -GamePackage 'com.gg.lostword.mi' -OutputDirectory $temp | Out-Null}
             else {& $script -AdbPath $fake -OutputDirectory $temp | Out-Null}
         } catch {$failure=$_.Exception.Message}
         $expected=@{multiple='Multiple devices';none='No online device';'reader-fail'='Unsupported core hash'}

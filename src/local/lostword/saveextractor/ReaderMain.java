@@ -12,6 +12,7 @@ import java.util.zip.ZipFile;
 /** Root helper: selected gameplay fields only, no injection or game writes. */
 public final class ReaderMain {
     String sourcePackage="";
+    boolean allowUnverifiedLibrary=false;
     static boolean isGamePackage(String name){
         return name.matches("[A-Za-z0-9_]+(?:\\.[A-Za-z0-9_]+)+") &&
             name.toLowerCase(Locale.ROOT).contains("lostword") && !name.startsWith("local.lostword.");
@@ -143,20 +144,22 @@ public final class ReaderMain {
         if(lib==null)throw new IOException("未找到支持的 64 位原版客户端，请确认已进入主页");
         status(out,"正在核对原版程序版本…");
         String actualHash=hashFile(lib);
-        if(!actualHash.equals(layout.getString("libil2cpp_sha256")))throw new IOException("此核心库尚未适配，已停止读取。包名："+sourcePackage+"；libil2cpp SHA256："+actualHash+"。请提供客户端版本及此信息以适配布局");
+        boolean libraryVerified=actualHash.equals(layout.getString("libil2cpp_sha256"));
+        if(!libraryVerified&&!allowUnverifiedLibrary)throw new IOException("此核心库尚未适配，已停止读取。包名："+sourcePackage+"；libil2cpp SHA256："+actualHash+"。可用电脑脚本 -AllowUnverifiedLibrary 实验读取；布局未经验证");
+        if(!libraryVerified)System.err.println("WARNING: experimental layout; library hash not verified. Validate exported data manually.");
         status(out,"正在读取第一份玩家快照…");JSONObject first=capture(pid,bases);
         Thread.sleep(750);status(out,"正在读取第二份快照并核对一致性…");JSONObject second=capture(pid,bases);
         for(String field:CORE)if(!stable(first.opt(field)).equals(stable(second.opt(field))))throw new IOException("读取期间玩家数据发生变化，请停在主页等待片刻后重试");
         String userJson=stable(second);if(userJson.getBytes(StandardCharsets.UTF_8).length>24*1024*1024)throw new IOException("存档过大");
-        JSONObject archive=new JSONObject().put("format","lostword-original-capture-v1").put("source_client",sourcePackage.equals("com.gg.lostword.bilibili")?"bilibili-6.6.0-arm64":sourcePackage).put("source_package",sourcePackage).put("source_library_sha256",actualHash)
+        JSONObject archive=new JSONObject().put("format","lostword-original-capture-v1").put("source_client",libraryVerified&&sourcePackage.equals("com.gg.lostword.bilibili")?"bilibili-6.6.0-arm64":sourcePackage).put("source_package",sourcePackage).put("source_library_sha256",actualHash).put("source_library_verified",libraryVerified).put("experimental_layout",!libraryVerified)
             .put("user_json",userJson).put("sha256",sha(userJson.getBytes(StandardCharsets.UTF_8))).put("created_at_ms",System.currentTimeMillis())
             .put("core_double_read_verified",true).put("original_client_modified",false).put("server_requests_sent",false);
         writeAtomic(out,archive.toString());status(out,"提取完成。请保存文件，再到私服账号页面导入存档位。");
     }
     public static void main(String[] args){
-        if(args.length!=2&&args.length!=3){System.err.println("Expected APK, output path, and optional game package");System.exit(2);}
+        if(args.length<2||args.length>4){System.err.println("Expected APK, output path, optional game package and --allow-unverified-library");System.exit(2);}
         File out=new File(args[1]);
-        try{ReaderMain reader=new ReaderMain(args[0]);if(args.length==3)reader.sourcePackage=args[2];reader.extract(out);}catch(Exception e){try{status(out,"提取未完成："+(e.getMessage()==null?e.getClass().getSimpleName():e.getMessage()));}catch(Exception ignored){}System.err.println("EXTRACTION_FAILED: "+e.getClass().getSimpleName());System.exit(1);}
+        try{ReaderMain reader=new ReaderMain(args[0]);for(int i=2;i<args.length;i++){if(args[i].equals("--allow-unverified-library"))reader.allowUnverifiedLibrary=true;else if(reader.sourcePackage.isEmpty()&&isGamePackage(args[i]))reader.sourcePackage=args[i];else throw new IOException("无效参数："+args[i]);}reader.extract(out);}catch(Exception e){try{status(out,"提取未完成："+(e.getMessage()==null?e.getClass().getSimpleName():e.getMessage()));}catch(Exception ignored){}System.err.println("EXTRACTION_FAILED: "+e.getClass().getSimpleName());System.exit(1);}
         System.exit(0);
     }
 }

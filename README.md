@@ -1,15 +1,15 @@
-# 归言录原版存档提取器 0.2.0
+# 归言录原版存档提取器 0.2.1
 
 用于提取自己已经登录的东方归言录玩家数据，再导入个人私服的存档位。APK 无联网权限，不自动上传文件，不需要输入 B站密码，也不读取登录令牌。不会修改原版游戏、原版存档或向官方服务器发请求。
 
 ## 下载
 
-- [下载 APK](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.0.apk)
-- [完整工具包：APK + 自动发现模拟器的电脑脚本](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.0.zip)
+- [下载 APK](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.1.apk)
+- [完整工具包：APK + 自动发现模拟器的电脑脚本](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.1.zip)
 
 ## 手机 / 有 su 的模拟器
 
-1. 安装 `lostword-save-extractor-0.2.0.apk`。需要 Android 8.0 或以上、Root，以及已验证版本的 B服 6.6.0 ARM64 客户端。
+1. 安装 `lostword-save-extractor-0.2.1.apk`。需要 Android 8.0 或以上、Root，以及已验证版本的 B服 6.6.0 ARM64 客户端。
 2. 自己打开原版 LostWord 客户端，登录到主页并等数据同步完成；提取期间不要打关卡、领奖、抽卡或切换账号。
 3. 返回「归言录存档提取」，点击「读取原版存档」，在 Root 管理器中允许授权。
 4. 成功后核对玩家名、等级、角色和绘卷数量，点击「保存存档文件…」，选择本机保存位置。
@@ -41,7 +41,7 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 .\Export-OriginalSave.ps1 -AdbPath 'E:\leidian\LDPlayer9\adb.exe' -GamePackage 'com.gg.lostword.mi'
 ```
 
-多个设备在线时，使用提示里的编号传入 `-Serial`；多个游戏同时运行时，用 `-GamePackage` 选择，手机端请仅保留一个游戏运行。下载后使用完整的 0.2.0 工具包，旧 APK 仍固定 B服，不能只更新脚本。
+多个设备在线时，使用提示里的编号传入 `-Serial`；多个游戏同时运行时，用 `-GamePackage` 选择，手机端请仅保留一个游戏运行。下载后使用完整的 0.2.1 工具包，旧 APK 仍固定 B服，不能只更新脚本。
 
 ## 渠道与版本兼容范围
 
@@ -68,7 +68,7 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 - 已修复 Windows PowerShell 5.1 把 ADB 成功进度误判为错误的问题；回归测试保留非零退出码报错。
 
 
-## 0.2.0 验证
+## 0.2.1 验证
 
 参见 [更新记录](CHANGELOG.md)。脚本回归：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-Adb.ps1`。完整流程模拟测试：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-Flow.ps1`。APK 编译、签名及 Android 合成数据测试通过；新版各渠道和端口发现仍需对应真实环境验证。
 
@@ -83,3 +83,13 @@ python build.py --sdk "你的 Android SDK 目录" --jdk "你的 JDK 目录"
 默认输出 `build/aligned-unsigned.apk`。如需签名，增加 `--keystore` 和 `--password-file` 参数，密钥和密码文件保留在仓库外。
 
 导出格式为 `lostword-original-capture-v1`，其中 `user_json` 是 UTF-8 玩家 JSON 文本，`sha256` 是该文本字节的 SHA256。它需要支持此格式的私服导入端，不能当作原版游戏的官方导入文件。
+
+## 实验读取不同核心库
+
+电脑脚本提供手动开启的实验模式，仅跳过核心库哈希匹配，继续使用现有布局；仍保留读取范围、字段检查和两次快照一致性检查。默认关闭，手机 APK 界面不自动开启。
+
+```powershell
+.\Export-OriginalSave.ps1 -AdbPath 'E:\leidian\LDPlayer9\adb.exe' -GamePackage 'com.gg.lostword.mi' -AllowUnverifiedLibrary
+```
+
+实验输出标记 `source_library_verified: false` 和 `experimental_layout: true`。成功导出不证明字段布局正确，须核对玩家、角色、绘卷和道具等数据，并仅导入空存档位；失败请保留日志。不要仅凭两次一致就认定兼容。
