@@ -93,3 +93,7 @@ python build.py --sdk "你的 Android SDK 目录" --jdk "你的 JDK 目录"
 ```
 
 实验输出标记 `source_library_verified: false` 和 `experimental_layout: true`。成功导出不证明字段布局正确，须核对玩家、角色、绘卷和道具等数据，并仅导入空存档位；失败请保留日志。不要仅凭两次一致就认定兼容。
+
+### 不输入命令的实验方式
+
+打开模拟器里的游戏并进入主页，双击工具包中的 `双击尝试提取.cmd`。此入口显式开启实验读取，自动保存 `extraction-log.txt`。成功后 JSON 也在同一文件夹；失败时只需发送日志文件。
