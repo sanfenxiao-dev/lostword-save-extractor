@@ -34,7 +34,7 @@ public class FakeAdb {
 '@
     $script=Join-Path $temp 'Export-OriginalSave.ps1'
     Copy-Item (Join-Path (Split-Path $PSScriptRoot) 'Export-OriginalSave.ps1') $script
-    Set-Content (Join-Path $temp 'lostword-save-extractor-0.2.2.apk') 'mock'
+    Set-Content (Join-Path $temp 'lostword-save-extractor-0.2.3.apk') 'mock'
     function Get-Process { [pscustomobject]@{ProcessName='MuMu';Id=4242;Path=$fake} }
     function Get-NetTCPConnection { [pscustomobject]@{OwningProcess=4242;LocalAddress='127.0.0.1';LocalPort=16384} }
     foreach ($mode in @('success','discovery','multiple','none','reader-fail','explicit','experimental')) {

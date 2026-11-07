@@ -76,8 +76,8 @@ if (-not $Serial) {
 }
 if ($Serial -notin $devices) {throw "Device '$Serial' is not online. Online devices: $($devices -join ', ')"}
 Write-Host "ADB: $AdbPath | Device: $Serial"
-$apk=Join-Path $PSScriptRoot 'lostword-save-extractor-0.2.2.apk'
-if (-not (Test-Path -LiteralPath $apk)) {throw 'Place this script next to lostword-save-extractor-0.2.2.apk (use the complete updated tool bundle).'}
+$apk=Join-Path $PSScriptRoot 'lostword-save-extractor-0.2.3.apk'
+if (-not (Test-Path -LiteralPath $apk)) {throw 'Place this script next to lostword-save-extractor-0.2.3.apk (use the complete updated tool bundle).'}
 $null=Invoke-Adb @('install','-r',$apk)
 $identity=Invoke-Adb @('shell','id')
 if ($identity -notmatch 'uid=0\b') {

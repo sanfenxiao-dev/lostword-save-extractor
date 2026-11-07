@@ -607,6 +607,30 @@
       "pa_points": "int",
       "pa_total_used_points": "int",
       "is_pa_reset_not_free": "int"
+    },
+    "TowerUnitData": {
+      "user_unit_id": "long",
+      "hp": "int",
+      "barrierCount": "int",
+      "nowSP": "int",
+      "spellCards": "int[]",
+      "commandCoolPasts": "int[]",
+      "barrierStates": "BarrierState[]",
+      "isPerkActivated": "bool"
+    },
+    "HeadListItem": {
+      "title": "string",
+      "is_preview": "bool",
+      "avatar_id": "int",
+      "filename": "string",
+      "is_put": "bool",
+      "is_clear": "bool",
+      "desc": "string"
+    },
+    "BarrierState": {
+      "rule": "bool",
+      "subType": "int",
+      "turn": "int"
     }
   },
   "offsets": {
@@ -1217,6 +1241,30 @@
       "pa_points": 60,
       "pa_total_used_points": 64,
       "is_pa_reset_not_free": 68
+    },
+    "TowerUnitData": {
+      "user_unit_id": 16,
+      "hp": 24,
+      "barrierCount": 28,
+      "nowSP": 32,
+      "spellCards": 40,
+      "commandCoolPasts": 48,
+      "barrierStates": 56,
+      "isPerkActivated": 64
+    },
+    "HeadListItem": {
+      "title": 16,
+      "is_preview": 24,
+      "avatar_id": 28,
+      "filename": 32,
+      "is_put": 40,
+      "is_clear": 41,
+      "desc": 48
+    },
+    "BarrierState": {
+      "rule": 16,
+      "subType": 20,
+      "turn": 24
     }
   },
   "user_type_rva": 72753216,
