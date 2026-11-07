@@ -11,7 +11,38 @@ import java.util.zip.ZipFile;
 
 /** Root helper: selected gameplay fields only, no injection or game writes. */
 public final class ReaderMain {
-    static final String PACKAGE="com.gg.lostword.bilibili";
+    String sourcePackage="";
+    static boolean isGamePackage(String name){
+        return name.matches("[A-Za-z0-9_]+(?:\\.[A-Za-z0-9_]+)+") &&
+            name.toLowerCase(Locale.ROOT).contains("lostword") && !name.startsWith("local.lostword.");
+    }
+    static String command(String... args)throws Exception {
+        Process p=new ProcessBuilder(args).redirectErrorStream(true).start();
+        String text=new String(readAll(p.getInputStream(),1024*1024),StandardCharsets.UTF_8).trim();
+        int code=p.waitFor();
+        if(code!=0)throw new IOException("命令失败 ("+code+"): "+Arrays.toString(args)+" "+text);
+        return text;
+    }
+    static int gamePid(String name)throws Exception {
+        Process p=new ProcessBuilder("/system/bin/pidof",name).start();
+        String result=new String(readAll(p.getInputStream(),4096),StandardCharsets.UTF_8).trim();
+        int code=p.waitFor();
+        return code==0 && result.matches("[0-9]+")?Integer.parseInt(result):0;
+    }
+    static String selectGame(String requested)throws Exception {
+        if(!requested.isEmpty()){
+            if(!isGamePackage(requested))throw new IOException("无效的 LostWord 包名");
+            if(gamePid(requested)==0)throw new IOException("请打开 "+requested+" 并登录到主页");
+            return requested;
+        }
+        List<String> running=new ArrayList<>();
+        for(String line:command("/system/bin/pm","list","packages").split("\n")){
+            String name=line.replaceFirst("^package:","").trim();
+            if(isGamePackage(name)&&gamePid(name)>0)running.add(name);
+        }
+        if(running.size()!=1)throw new IOException(running.isEmpty()?"未找到运行中的 LostWord，请手动登录到主页":"多个 LostWord 客户端正在运行，请仅保留一个，或在电脑脚本使用 -GamePackage 指定："+running);
+        return running.get(0);
+    }
     static final String[] CORE={"player_name","level","exp","unit","picture","item","team","quest_playdata","home_unit_info","ability_seal"};
     JSONObject layout,schema,offsets;
     RandomAccessFile memory;
@@ -104,27 +135,28 @@ public final class ReaderMain {
         return value==null||value==JSONObject.NULL?"null":value instanceof String?JSONObject.quote((String)value):value.toString();
     }
     void extract(File out)throws Exception {
-        status(out,"正在查找原版 B服进程…");
-        Process proc=new ProcessBuilder("/system/bin/pidof",PACKAGE).start();String result=new String(readAll(proc.getInputStream(),1024),StandardCharsets.UTF_8).trim();proc.waitFor();
-        if(!result.matches("[0-9]+"))throw new IOException("请手动打开原版 B服并进入主页，再回来提取");int pid=Integer.parseInt(result);
+        status(out,"正在查找 LostWord 进程…");
+        sourcePackage=selectGame(sourcePackage);int pid=gamePid(sourcePackage);
+        if(pid==0)throw new IOException("游戏已退出，请重新登录主页");
         String maps=new String(Files.readAllBytes(new File("/proc/"+pid+"/maps").toPath()),StandardCharsets.UTF_8);List<Long> bases=new ArrayList<>();String lib=null;
         for(String line:maps.split("\n")){String[] parts=line.trim().split("\\s+",6);if(parts.length==6&&parts[5].endsWith("/libil2cpp.so")&&Long.parseLong(parts[2],16)==0){bases.add(Long.parseLong(parts[0].split("-")[0],16));lib=parts[5];}}
         if(lib==null)throw new IOException("未找到支持的 64 位原版客户端，请确认已进入主页");
         status(out,"正在核对原版程序版本…");
-        if(!hashFile(lib).equals(layout.getString("libil2cpp_sha256")))throw new IOException("此原版程序版本尚不支持，已停止读取；当前仅支持验证过的 B服 6.6.0 ARM64");
+        String actualHash=hashFile(lib);
+        if(!actualHash.equals(layout.getString("libil2cpp_sha256")))throw new IOException("此核心库尚未适配，已停止读取。包名："+sourcePackage+"；libil2cpp SHA256："+actualHash+"。请提供客户端版本及此信息以适配布局");
         status(out,"正在读取第一份玩家快照…");JSONObject first=capture(pid,bases);
         Thread.sleep(750);status(out,"正在读取第二份快照并核对一致性…");JSONObject second=capture(pid,bases);
         for(String field:CORE)if(!stable(first.opt(field)).equals(stable(second.opt(field))))throw new IOException("读取期间玩家数据发生变化，请停在主页等待片刻后重试");
         String userJson=stable(second);if(userJson.getBytes(StandardCharsets.UTF_8).length>24*1024*1024)throw new IOException("存档过大");
-        JSONObject archive=new JSONObject().put("format","lostword-original-capture-v1").put("source_client","bilibili-6.6.0-arm64")
+        JSONObject archive=new JSONObject().put("format","lostword-original-capture-v1").put("source_client",sourcePackage.equals("com.gg.lostword.bilibili")?"bilibili-6.6.0-arm64":sourcePackage).put("source_package",sourcePackage).put("source_library_sha256",actualHash)
             .put("user_json",userJson).put("sha256",sha(userJson.getBytes(StandardCharsets.UTF_8))).put("created_at_ms",System.currentTimeMillis())
             .put("core_double_read_verified",true).put("original_client_modified",false).put("server_requests_sent",false);
         writeAtomic(out,archive.toString());status(out,"提取完成。请保存文件，再到私服账号页面导入存档位。");
     }
     public static void main(String[] args){
-        if(args.length!=2){System.err.println("Expected APK and output path");System.exit(2);}
+        if(args.length!=2&&args.length!=3){System.err.println("Expected APK, output path, and optional game package");System.exit(2);}
         File out=new File(args[1]);
-        try{new ReaderMain(args[0]).extract(out);}catch(Exception e){try{status(out,"提取未完成："+(e.getMessage()==null?e.getClass().getSimpleName():e.getMessage()));}catch(Exception ignored){}System.err.println("EXTRACTION_FAILED: "+e.getClass().getSimpleName());System.exit(1);}
+        try{ReaderMain reader=new ReaderMain(args[0]);if(args.length==3)reader.sourcePackage=args[2];reader.extract(out);}catch(Exception e){try{status(out,"提取未完成："+(e.getMessage()==null?e.getClass().getSimpleName():e.getMessage()));}catch(Exception ignored){}System.err.println("EXTRACTION_FAILED: "+e.getClass().getSimpleName());System.exit(1);}
         System.exit(0);
     }
 }

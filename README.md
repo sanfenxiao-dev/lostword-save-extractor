@@ -1,23 +1,23 @@
-# 归言录原版存档提取器 0.1.0
+# 归言录原版存档提取器 0.2.0
 
-用于提取自己已经登录的东方归言录 B服玩家数据，再导入个人私服的存档位。APK 无联网权限，不自动上传文件，不需要输入 B站密码，也不读取登录令牌。不会修改原版游戏、原版存档或向官方服务器发请求。
+用于提取自己已经登录的东方归言录玩家数据，再导入个人私服的存档位。APK 无联网权限，不自动上传文件，不需要输入 B站密码，也不读取登录令牌。不会修改原版游戏、原版存档或向官方服务器发请求。
 
 ## 下载
 
-- [下载 APK](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.1.0.apk)
-- [完整工具包：APK + MuMu 电脑脚本](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.1.0.zip)
+- [下载 APK](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.0.apk)
+- [完整工具包：APK + 自动发现模拟器的电脑脚本](https://github.com/sanfenxiao-dev/lostword-save-extractor/releases/latest/download/lostword-save-extractor-0.2.0.zip)
 
 ## 手机 / 有 su 的模拟器
 
-1. 安装 `lostword-save-extractor-0.1.0.apk`。需要 Android 8.0 或以上、Root，以及已验证版本的 B服 6.6.0 ARM64 客户端。
-2. 自己打开原版 B服，登录到主页并等数据同步完成；提取期间不要打关卡、领奖、抽卡或切换账号。
+1. 安装 `lostword-save-extractor-0.2.0.apk`。需要 Android 8.0 或以上、Root，以及已验证版本的 B服 6.6.0 ARM64 客户端。
+2. 自己打开原版 LostWord 客户端，登录到主页并等数据同步完成；提取期间不要打关卡、领奖、抽卡或切换账号。
 3. 返回「归言录存档提取」，点击「读取原版存档」，在 Root 管理器中允许授权。
 4. 成功后核对玩家名、等级、角色和绘卷数量，点击「保存存档文件…」，选择本机保存位置。
 5. 打开私服账号页面，登录自己的账号，选择空存档位，导入保存的 JSON 文件。已有存档位的替换仍需页面明确确认。
 
 如果原版被系统后台清理，重新打开原版进入主页后再提取。工具只支持已核验程序版本；其他版本会停止读取，而不会猜测内存结构。没有 Root 的设备不能用这个独立 APK 直接提取别的应用数据。
 
-## MuMu：有 ADB Root，但 APK 找不到 su
+## 电脑辅助：MuMu、雷电等模拟器
 
 MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su。这时使用包内电脑辅助脚本：
 
@@ -32,7 +32,22 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 ./Export-OriginalSave.ps1 -AdbPath '你的 adb.exe 完整路径' -Serial '127.0.0.1:16384'
 ```
 
-脚本需要电脑已连接模拟器的 ADB。它不会扫描网络、自动登录账号或关闭游戏。ADB Root 不可用时会停止，并提示使用 APK 的 su 方式。
+脚本优先使用 ADB 已连接的设备；没有在线设备时，从 MuMu、雷电、夜神、逍遥、BlueStacks 等模拟器进程的本机监听端口尝试发现 ADB，每个连接最多等待 4 秒。不会扫描局域网或整个端口范围。不同模拟器安装方式可能仍需手动指定 ADB 路径或端口；不会自动登录或关闭游戏。ADB Root 不可用时会停止。
+
+```powershell
+# 自动寻找 ADB、设备和运行中的 LostWord
+.\Export-OriginalSave.ps1
+# 手动指定雷电 ADB 和小米服（无需固定模拟器端口）
+.\Export-OriginalSave.ps1 -AdbPath 'E:\leidian\LDPlayer9\adb.exe' -GamePackage 'com.gg.lostword.mi'
+```
+
+多个设备在线时，使用提示里的编号传入 `-Serial`；多个游戏同时运行时，用 `-GamePackage` 选择，手机端请仅保留一个游戏运行。下载后使用完整的 0.2.0 工具包，旧 APK 仍固定 B服，不能只更新脚本。
+
+## 渠道与版本兼容范围
+
+自动发现包名中包含 `lostword` 的客户端（排除本提取器），包含小米服 `com.gg.lostword.mi`、B服及其他渠道。名称识别不是游戏身份或数据布局的证明：读取前必须通过核心库 SHA256 校验。
+
+当前随附布局仅核验过 B服 6.6.0 ARM64。其他渠道只有在核心库与该布局完全一致时才进入读取；不一致时显示目标包名及核心库哈希并停止，不猜测偏移。**尚未实测小米服，也不能保证所有渠道、国际服、32 位或未来版本可导出。** 适配新核心库需要核对其字段结构后更新布局，不能删除校验强行读取。
 
 ## 数据范围
 
@@ -42,7 +57,7 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 
 文件包含个人游戏进度，应由玩家自己保管。导出中的校验用于发现文件损坏，不代表官方认证。私服的资源和玩法实现仍影响导入后的实际显示与游玩。
 
-## 本次验证
+## 0.1.0 历史验证
 
 - APK 构建、v2/v3 签名检查及 MuMu 安装通过。
 - Android 无界面合成内存布局测试通过：64 位整数、UTF16、列表、字典、空值、范围限制、敏感字段过滤。
@@ -52,6 +67,10 @@ MuMu 的 Root 设置可能只让电脑端 ADB 获得权限，APK 内找不到 su
 - MuMu 的电脑辅助方式已完成真实原版进程提取，文件校验、两次核心数据一致性、私服临时数据库导入导出往返通过。手机 su 授权和 APK 界面保存流程仍待手测。
 - 已修复 Windows PowerShell 5.1 把 ADB 成功进度误判为错误的问题；回归测试保留非零退出码报错。
 
+
+## 0.2.0 验证
+
+参见 [更新记录](CHANGELOG.md)。脚本回归：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-Adb.ps1`。完整流程模拟测试：`powershell -NoProfile -ExecutionPolicy Bypass -File tests/Test-Flow.ps1`。APK 编译、签名及 Android 合成数据测试通过；新版各渠道和端口发现仍需对应真实环境验证。
 
 ## 从源码构建
 

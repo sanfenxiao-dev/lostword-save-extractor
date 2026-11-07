@@ -9,6 +9,11 @@ import org.json.*;
 public final class ReaderSelfTest {
     static void require(boolean value){if(!value)throw new AssertionError("Synthetic reader check failed");}
     public static void main(String[] args)throws Exception {
+        require(ReaderMain.isGamePackage("com.gg.lostword.mi"));
+        require(ReaderMain.isGamePackage("com.gg.lostword.bilibili"));
+        require(ReaderMain.isGamePackage("jp.goodsmile.touhoulostword_android"));
+        require(!ReaderMain.isGamePackage("local.lostword.saveextractor"));
+        require(!ReaderMain.isGamePackage("com.gg.lostword.mi;id"));
         ReaderMain r=new ReaderMain(args[0]);File temp=new File(args[1],"reader-self-test-memory.bin");
         ByteBuffer b=ByteBuffer.allocate(8192).order(ByteOrder.LITTLE_ENDIAN);
         b.putInt(0x100,-23);b.putLong(0x108,9007199254740993L);b.put(0x110,(byte)1);b.putFloat(0x114,0.25f);

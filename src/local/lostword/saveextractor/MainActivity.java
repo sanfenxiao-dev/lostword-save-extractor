@@ -26,8 +26,8 @@ public final class MainActivity extends Activity {
         ScrollView scroll=new ScrollView(this);LinearLayout page=new LinearLayout(this);page.setOrientation(LinearLayout.VERTICAL);page.setPadding(dp(24),dp(40),dp(24),dp(28));page.setBackgroundColor(Color.rgb(247,246,240));scroll.addView(page);
         page.addView(text("归言录 · 存档提取",27,Color.rgb(35,65,65)));
         page.addView(text("把原版的旅程，带到自己的服务器。",16,Color.DKGRAY));
-        page.addView(text("1  设备开启 Root，并允许本工具使用 Root。\n2  手动打开原版 B服，登录到主页后保持不操作。\n3  返回这里提取，保存 JSON 文件，再到私服账号页面导入。",17,Color.rgb(45,55,55)));
-        page.addView(text("支持：已验证的 B服 6.6.0 · ARM64\n仅读取当前已同步到客户端的玩家数据。未同步的服务端历史不在提取范围内。",14,Color.DKGRAY));
+        page.addView(text("1  设备开启 Root，并允许本工具使用 Root。\n2  手动打开 LostWord 客户端，登录到主页后保持不操作。\n3  返回这里提取，保存 JSON 文件，再到私服账号页面导入。",17,Color.rgb(45,55,55)));
+        page.addView(text("自动识别 LostWord 渠道包；读取须通过核心库校验。已核验布局：B服 6.6.0 · ARM64\n仅读取当前已同步到客户端的玩家数据。未同步的服务端历史不在提取范围内。",14,Color.DKGRAY));
         extract=new Button(this);extract.setText("读取原版存档");page.addView(extract);
         progress=new ProgressBar(this);progress.setVisibility(View.GONE);page.addView(progress);
         state=text("等待提取",16,Color.rgb(35,65,65));page.addView(state);
